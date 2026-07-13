@@ -1,0 +1,802 @@
+[
+  {
+    "nombre": "AARON MURPHY",
+    "cedula": "644065911"
+  },
+  {
+    "nombre": "593 LIQUIDVENTURES S.A.S",
+    "cedula": "1891809886001"
+  },
+  {
+    "nombre": "ABAD CALVA JUAN AMILCAR",
+    "cedula": "1710167980"
+  },
+  {
+    "nombre": "ABAD CALVA SANTOS ALBERTO",
+    "cedula": "1101393930001"
+  },
+  {
+    "nombre": "ABAD CARCELEN JIMMY ROQUE",
+    "cedula": "1600434425001"
+  },
+  {
+    "nombre": "ABAD CUEVA MILIAN EUFEMIO",
+    "cedula": "1708443427"
+  },
+  {
+    "nombre": "ABAD JARAMILLO ZOILA ELENA",
+    "cedula": "1600335564"
+  },
+  {
+    "nombre": "ABAD JIRON JUAN FLORENCIO",
+    "cedula": "1102318993"
+  },
+  {
+    "nombre": "ABAD MOREIRA RAUL ADALBERTO",
+    "cedula": "1708043300001"
+  },
+  {
+    "nombre": "ABAD NARANJO MARCO ANTONIO",
+    "cedula": "1600268500001"
+  },
+  {
+    "nombre": "ABAD PEÑAFIEL JENRRY MILTON",
+    "cedula": "1600380388"
+  },
+  {
+    "nombre": "ABAD REATIGUI JESSICA GEOMARA",
+    "cedula": "1600625626001"
+  },
+  {
+    "nombre": "ABAD ROJAS ALEXANDRA ROSIO",
+    "cedula": "1500965973001"
+  },
+  {
+    "nombre": "ABAD ROJAS ANGEL WILFRIDO",
+    "cedula": "1500754211"
+  },
+  {
+    "nombre": "ABAD ROJAS JOSE LEONIDAS",
+    "cedula": "1500707771001"
+  },
+  {
+    "nombre": "ABAD ROJAS WELINTON JAKSON",
+    "cedula": "1500982580"
+  },
+  {
+    "nombre": "ABARCA BUSTOS ADA ZULEMA",
+    "cedula": "1500383557"
+  },
+  {
+    "nombre": "ABARCA NUÑEZ FRANCISCO LORENZO",
+    "cedula": "1900234012001"
+  },
+  {
+    "nombre": "ABARCA NUÑEZ JOSE MANUEL",
+    "cedula": "0700822836"
+  },
+  {
+    "nombre": "ABARCA SALAZAR DIEGO JOSE",
+    "cedula": "1707316301001"
+  },
+  {
+    "nombre": "ABARCA ZAQUINAULA DALTON ANDRES",
+    "cedula": "1900354414001"
+  },
+  {
+    "nombre": "ABATA ALEXANDER",
+    "cedula": "0802111112"
+  },
+  {
+    "nombre": "ABATA BONILLA WILSON VICTOR",
+    "cedula": "1500490071001"
+  },
+  {
+    "nombre": "ABATA HENDRY",
+    "cedula": "1500844590001"
+  },
+  {
+    "nombre": "ABATA REINOSO BELLA NARCISA DEL PILAR",
+    "cedula": "1706172648"
+  },
+  {
+    "nombre": "ABATA SINCHIHUANO LILIA ELIZABETH",
+    "cedula": "1500489891"
+  },
+  {
+    "nombre": "ABBA CONSTCEDULATORA S.A.S",
+    "cedula": "1691728389001"
+  },
+  {
+    "nombre": "ABBAD ROJAS OSCAR ORLANDO",
+    "cedula": "0301454484"
+  },
+  {
+    "nombre": "ABDON SENON HARO FRANCO",
+    "cedula": "1201268891"
+  },
+  {
+    "nombre": "ABEIGA ALCIVAR NATAN SANTIAGO",
+    "cedula": "0926773607001"
+  },
+  {
+    "nombre": "ABEL SANTIAGO VARGAS CEDAR",
+    "cedula": "1650055047"
+  },
+  {
+    "nombre": "ABELARDO ALFONSO MANCERO ALVARADO",
+    "cedula": "1500545031"
+  },
+  {
+    "nombre": "ABELARDO CHIMBORAZO",
+    "cedula": "0201179579"
+  },
+  {
+    "nombre": "ABIGAIL TANGUILA",
+    "cedula": "2250143360"
+  },
+  {
+    "nombre": "ABN ENTEPRISE CIA LTDA",
+    "cedula": "1891811252001"
+  },
+  {
+    "nombre": "ABRIL ABRIL IRENE ADRIANA",
+    "cedula": "1600546970"
+  },
+  {
+    "nombre": "ABRIL ABRIL ROSA ELENA",
+    "cedula": "1600455834"
+  },
+  {
+    "nombre": "ABRIL AGUILAR MARCO FRDDY",
+    "cedula": "1500835069"
+  },
+  {
+    "nombre": "ABRIL CAMINO ANDRES RAFAEL",
+    "cedula": "1803760402001"
+  },
+  {
+    "nombre": "ABRIL CARDENAS CARLOS ALBERTO",
+    "cedula": "1500679772"
+  },
+  {
+    "nombre": "ABRIL CARRILLO EDWIN FABIAN",
+    "cedula": "1802267680001"
+  },
+  {
+    "nombre": "ABRIL CHAFLA CHRISTIAN PAUL",
+    "cedula": "1804318150001"
+  },
+  {
+    "nombre": "ABRIL GUEVARA MARIA FERNANDA",
+    "cedula": "1804280004"
+  },
+  {
+    "nombre": "ABRIL LIZANO DIEGO FABRICIO",
+    "cedula": "1802344000001"
+  },
+  {
+    "nombre": "ABRIL LOGROR MELFA SILVANA",
+    "cedula": "1723765226"
+  },
+  {
+    "nombre": "ABRIL ZABALA FRANCKLIN ARQUIMIDES",
+    "cedula": "1600487191"
+  },
+  {
+    "nombre": "ACADEMIA DE CAPACITACION & INOVACION  ELITE",
+    "cedula": "1591728343001"
+  },
+  {
+    "nombre": "ACAN ACAN JOSE MARIA",
+    "cedula": "0603326844"
+  },
+  {
+    "nombre": "ACAN CONGACHA JORGE MANUEL",
+    "cedula": "0605072487"
+  },
+  {
+    "nombre": "ACAN GUAMAN ANGEL BELISARIO",
+    "cedula": "1600867905"
+  },
+  {
+    "nombre": "ACAN USHCA JOSE LUIS",
+    "cedula": "1600841629"
+  },
+  {
+    "nombre": "ACAN USHCA JUAN MANUEL",
+    "cedula": "1600334104"
+  },
+  {
+    "nombre": "ACAN USHCA OLGITA MAGDALENA",
+    "cedula": "1500816481001"
+  },
+  {
+    "nombre": "ACARO ALVAREZ LORENA RAQUEL",
+    "cedula": "1600509119"
+  },
+  {
+    "nombre": "ACARO PAREDEZ MELANIO",
+    "cedula": "1600109845"
+  },
+  {
+    "nombre": "ACEBO ILLESCAS LUPE LILIANA",
+    "cedula": "1720922507001"
+  },
+  {
+    "nombre": "ACEICHA BASTIDAS LUIS NELSON",
+    "cedula": "1804329769"
+  },
+  {
+    "nombre": "ACERO GALLO ELVIA CECILIA",
+    "cedula": "1725745788001"
+  },
+  {
+    "nombre": "ACERO UMAQUINGA JUAN ISAAC",
+    "cedula": "1720483609001"
+  },
+  {
+    "nombre": "ACEROPARTES S.A.S",
+    "cedula": "0993385639001"
+  },
+  {
+    "nombre": "ACEROSORIENTE",
+    "cedula": "1591728321001"
+  },
+  {
+    "nombre": "ACESXILICON DESIGN TECHNOLOGY CIA. LTDA.",
+    "cedula": "1891717691001"
+  },
+  {
+    "nombre": "ACHACHI LIZANO MYRIAM CECILIA",
+    "cedula": "1802701670"
+  },
+  {
+    "nombre": "ACHACHI SAILEMA MARIA DE LAS MERCEDES",
+    "cedula": "1500029598001"
+  },
+  {
+    "nombre": "ACHACHI SAILEMA MARIANA DE JESUS",
+    "cedula": "1500148422"
+  },
+  {
+    "nombre": "ACHACHI SEILEMA WILSON FERNANDO",
+    "cedula": "1500333107"
+  },
+  {
+    "nombre": "ACHACHI VARGAS JHOSTIN OMAR",
+    "cedula": "1752235554"
+  },
+  {
+    "nombre": "ACHOTE ANDY KATTY MARGARITA",
+    "cedula": "1500652001001"
+  },
+  {
+    "nombre": "ACHURY LEAL HAROL",
+    "cedula": "1758471989001"
+  },
+  {
+    "nombre": "ACI1593 S.A.S",
+    "cedula": "1498305225001"
+  },
+  {
+    "nombre": "ACONDA GUAMANZARA JUAN MANUEL",
+    "cedula": "1712452950"
+  },
+  {
+    "nombre": "ACOSTA ACENCIO JUAN CARLOS",
+    "cedula": "1802354603"
+  },
+  {
+    "nombre": "ACOSTA ACOSTA FRANKLIN MARCELO",
+    "cedula": "1803250735001"
+  },
+  {
+    "nombre": "ACOSTA ACOSTA JONNATHAN FERNANDO",
+    "cedula": "1850234442"
+  },
+  {
+    "nombre": "ACOSTA ACOSTA JULIO ROMARIO",
+    "cedula": "1805215694001"
+  },
+  {
+    "nombre": "ACOSTA ALCOCER JESSICA BETTY",
+    "cedula": "1600507709"
+  },
+  {
+    "nombre": "ACOSTA ALMEIDA JOSE SALVADOR",
+    "cedula": "1802353241001"
+  },
+  {
+    "nombre": "ACOSTA ALMEIDA SEGUNDO VICENTE",
+    "cedula": "1600165839"
+  },
+  {
+    "nombre": "ACOSTA ANDRES ANIBAL",
+    "cedula": "1600514028"
+  },
+  {
+    "nombre": "ACOSTA AROLLANA JUAN PEDRO",
+    "cedula": "1500450125"
+  },
+  {
+    "nombre": "ACOSTA AURELIO ANIBAL",
+    "cedula": "1600129983001"
+  },
+  {
+    "nombre": "ACOSTA AYAVACA IVAN OSWALDO",
+    "cedula": "1600277592"
+  },
+  {
+    "nombre": "ACOSTA AYAVACA LEANDRO",
+    "cedula": "1600407488001"
+  },
+  {
+    "nombre": "ACOSTA CAIZA ELIZABETH",
+    "cedula": "1500734635"
+  },
+  {
+    "nombre": "ACOSTA CAÑARTE GABRIELA ESTEFANIA",
+    "cedula": "1500806169001"
+  },
+  {
+    "nombre": "ACOSTA CANDO BYRON ARIEL",
+    "cedula": "1805490552"
+  },
+  {
+    "nombre": "ACOSTA CENBLANTES LUIS RODRIGO",
+    "cedula": "0502867724"
+  },
+  {
+    "nombre": "ACOSTA CHULDE LEDY MARLENE",
+    "cedula": "1002363826001"
+  },
+  {
+    "nombre": "ACOSTA COCA ANTONIO",
+    "cedula": "1801452200001"
+  },
+  {
+    "nombre": "ACOSTA DIAZ JUAN AGUSTIN",
+    "cedula": "0400404018001"
+  },
+  {
+    "nombre": "ACOSTA ERAZO JUAN GABRIEL",
+    "cedula": "1600862625"
+  },
+  {
+    "nombre": "ACOSTA ESCOBAR ANGELICA MARIA",
+    "cedula": "1600222606"
+  },
+  {
+    "nombre": "ACOSTA FLORES ALCI RAMIRO",
+    "cedula": "1600557100001"
+  },
+  {
+    "nombre": "ACOSTA FONSECA WILSON GABRIEL",
+    "cedula": "0501618326"
+  },
+  {
+    "nombre": "ACOSTA GALLEGOS KEVIN ALEXIS",
+    "cedula": "1550247553"
+  },
+  {
+    "nombre": "ACOSTA GALLO SANDRA ELIZABETH",
+    "cedula": "1713864187001"
+  },
+  {
+    "nombre": "ACOSTA GUERRERO  NELVA ROSARIO",
+    "cedula": "1500684111"
+  },
+  {
+    "nombre": "ACOSTA GUERRERO LIDIA CLARISA",
+    "cedula": "1500425317001"
+  },
+  {
+    "nombre": "ACOSTA GUERRERO MARINAL ISABEL",
+    "cedula": "1500318710"
+  },
+  {
+    "nombre": "ACOSTA HERRERA ELIZABETH FERNANDA",
+    "cedula": "1803562121001"
+  },
+  {
+    "nombre": "ACOSTA JIMENEZ IRALDA ROCIO",
+    "cedula": "0501472393001"
+  },
+  {
+    "nombre": "ACOSTA LASCANO ANGEL MARIA",
+    "cedula": "1802503001"
+  },
+  {
+    "nombre": "ACOSTA LLANO WUILIAN",
+    "cedula": "0503627812"
+  },
+  {
+    "nombre": "ACOSTA MAMALLACTA VALERIA TATIANA",
+    "cedula": "1501244337"
+  },
+  {
+    "nombre": "ACOSTA MAYORGA NEIS MARIANELA",
+    "cedula": "1802289601"
+  },
+  {
+    "nombre": "ACOSTA MONICA",
+    "cedula": "1803720422"
+  },
+  {
+    "nombre": "ACOSTA MOSQUERA XIMENA DE LOS ANGELES",
+    "cedula": "1802151306001"
+  },
+  {
+    "nombre": "ACOSTA MOYA MANUEL SALVADOR",
+    "cedula": "1600126484001"
+  },
+  {
+    "nombre": "ACOSTA NOROÑA EDGAR RAMIRO",
+    "cedula": "1706859756"
+  },
+  {
+    "nombre": "ACOSTA ORELLANA MIGUEL EFRAIN",
+    "cedula": "1500636566001"
+  },
+  {
+    "nombre": "ACOSTA PAREDES SANDRA DEL ROCIO",
+    "cedula": "1803872843"
+  },
+  {
+    "nombre": "ACOSTA PEREZ DARIO GUSTAVO",
+    "cedula": "0503584997001"
+  },
+  {
+    "nombre": "ACOSTA PICO JAVIER JOSE",
+    "cedula": "1600401762"
+  },
+  {
+    "nombre": "ACOSTA PILCO LUIS EDUARDO",
+    "cedula": "1600616518"
+  },
+  {
+    "nombre": "ACOSTA PINEDA MARLON FILADELFO",
+    "cedula": "1801712645001"
+  },
+  {
+    "nombre": "ACOSTA REYES OSVALDO ISMAEL",
+    "cedula": "1600168593001"
+  },
+  {
+    "nombre": "ACOSTA RODRIGUEZ CARLOTA ELIZABETH",
+    "cedula": "1600221723"
+  },
+  {
+    "nombre": "ACOSTA RODRIGUEZ WILLIAM EDISON",
+    "cedula": "1600256224001"
+  },
+  {
+    "nombre": "ACOSTA RRIOS JANETH MARIELA",
+    "cedula": "1600401150"
+  },
+  {
+    "nombre": "ACOSTA UBILLUZ BRYAN MAURICIO",
+    "cedula": "1600629719001"
+  },
+  {
+    "nombre": "ACOSTA UBILLUZ JENNY DAYAN",
+    "cedula": "1600552069"
+  },
+  {
+    "nombre": "ACOSTA VILLACIS ANTONIO DAVID",
+    "cedula": "1803854064"
+  },
+  {
+    "nombre": "ACOSTA VILLARES MILTON GERMAN",
+    "cedula": "1801972926001"
+  },
+  {
+    "nombre": "ACOSTA ZARUMA FRIXON ARIEL",
+    "cedula": "1650049263"
+  },
+  {
+    "nombre": "ACTIVIDADES DE CONSTCEDULACION Y SERVICIO S.A.S",
+    "cedula": "1591727939001"
+  },
+  {
+    "nombre": "ACTYSERVID CONSTCEDULACION S.A.S",
+    "cedula": "1498303907001"
+  },
+  {
+    "nombre": "ACUÑA BARREROS VERONICA MARCELA",
+    "cedula": "1600331225001"
+  },
+  {
+    "nombre": "ACUÑA CARRASCO EDGAR MAXTRANCEL",
+    "cedula": "1800889204001"
+  },
+  {
+    "nombre": "ACUÑA CARRASCO NARCO RODOLFO",
+    "cedula": "1800052423"
+  },
+  {
+    "nombre": "ACUÑA CHAVEZ DANIELA SOFIA",
+    "cedula": "1804075321001"
+  },
+  {
+    "nombre": "ACUÑA PATRICIO",
+    "cedula": "1600298036"
+  },
+  {
+    "nombre": "ACUÑA PAVON WSHINTONG VICENTE",
+    "cedula": "1704441524"
+  },
+  {
+    "nombre": "ACUÑA PEREZ GLORIA MARINA",
+    "cedula": "1600213720001"
+  },
+  {
+    "nombre": "ACUÑA PEREZ JORGE RAUL",
+    "cedula": "1600208803"
+  },
+  {
+    "nombre": "ACUÑA PEREZ OLDEMAR",
+    "cedula": "1600164386"
+  },
+  {
+    "nombre": "ACUÑA TACURI JORGE DAVID",
+    "cedula": "1600684813"
+  },
+  {
+    "nombre": "ACUÑA TAMAYO ANGEL MARCELO",
+    "cedula": "1801631415001"
+  },
+  {
+    "nombre": "ACUÑA VACA MARIA CRISTINA",
+    "cedula": "1600518441001"
+  },
+  {
+    "nombre": "ACURIO ACURIO ALEX JAVIER",
+    "cedula": "1500792401"
+  },
+  {
+    "nombre": "ACURIO ACURIO CARMEN DEL ROCIO",
+    "cedula": "1802041465001"
+  },
+  {
+    "nombre": "ACURIO ACURIO MAYRA ROCIO",
+    "cedula": "1500792393"
+  },
+  {
+    "nombre": "ACURIO ACURIO SILVIA MARGOT",
+    "cedula": "1600412017"
+  },
+  {
+    "nombre": "ACURIO BARRERA LORGIO ENRIQUE",
+    "cedula": "1803818853"
+  },
+  {
+    "nombre": "ACURIO PORTUGAL LILIA CORINA",
+    "cedula": "1801888593001"
+  },
+  {
+    "nombre": "ACURIO SALGUERO PIEDAD IRALDA",
+    "cedula": "0501240840001"
+  },
+  {
+    "nombre": "ADALBERTO JIMENEZ",
+    "cedula": "1801522127"
+  },
+  {
+    "nombre": "ADRIAN",
+    "cedula": "1500270754"
+  },
+  {
+    "nombre": "ADRIAN YUMBO FRANCO",
+    "cedula": "1500049943001"
+  },
+  {
+    "nombre": "ADRIANO CONDO JOSE ANIBAL",
+    "cedula": "0602135238"
+  },
+  {
+    "nombre": "ADRIANO YUBAILLI MARCO VINICIO",
+    "cedula": "1600511826"
+  },
+  {
+    "nombre": "ADVENTURERIVER AMAZONAS CIA. LTDA.",
+    "cedula": "1591709271001"
+  },
+  {
+    "nombre": "AERO CLUB SOCIAL Y DEPORTIVO PASTAZA",
+    "cedula": "1690015559001"
+  },
+  {
+    "nombre": "AEROKASHURCO CIA. LTDA.",
+    "cedula": "1691709961001"
+  },
+  {
+    "nombre": "AEROTECNICOS AEROSERTEC CIA. LTDA.",
+    "cedula": "1792419123001"
+  },
+  {
+    "nombre": "AGENCIA DE TURISMO Y ECOTURISMO SA",
+    "cedula": "1792021294001"
+  },
+  {
+    "nombre": "AGENCIA DE VIAJES SOUTH AMERICAN TRAVEL EXPERIENCES SOUTHAMETRAVEL S A",
+    "cedula": "1792482801001"
+  },
+  {
+    "nombre": "AGENCIA DE VIAJES WITUK TOURS S.A.S",
+    "cedula": "1591728992001"
+  },
+  {
+    "nombre": "AGINDA PATRICIO NICODEMO",
+    "cedula": "1500189129"
+  },
+  {
+    "nombre": "AGINDA PISANGO TANIA MARILU",
+    "cedula": "1500907884"
+  },
+  {
+    "nombre": "AGREDA AJILA NILDA YOVANNI",
+    "cedula": "1500485683"
+  },
+  {
+    "nombre": "AGREDA GORDILLO LUIS FERNANDO",
+    "cedula": "1900619154001"
+  },
+  {
+    "nombre": "AGREDA MAZA MELKIZEDEC YOVANNY",
+    "cedula": "1600238073"
+  },
+  {
+    "nombre": "AGREDA MAZA NANCY GUADALUPE",
+    "cedula": "1600302291001"
+  },
+  {
+    "nombre": "AGREDA MOLINA JOSE ANGEL",
+    "cedula": "1707378871"
+  },
+  {
+    "nombre": "AGREDA VILLAMARIN LUIS SIMON",
+    "cedula": "1801317882"
+  },
+  {
+    "nombre": "AGRICOLA BAQUERO AGROBAQUERO S.A.",
+    "cedula": "1792111242001"
+  },
+  {
+    "nombre": "AGRICOLA OPLA CIA.LTDA.",
+    "cedula": "1691725398001"
+  },
+  {
+    "nombre": "AGRIPINA GUAMAN",
+    "cedula": "1102126858"
+  },
+  {
+    "nombre": "AGRODELICORP CIA. LTDA",
+    "cedula": "1792503493001"
+  },
+  {
+    "nombre": "AGROHUERTOS S.A.S",
+    "cedula": "1498308781001"
+  },
+  {
+    "nombre": "AGROINDUSTRIAL RIOBRAVO S.A.",
+    "cedula": "1391843550001"
+  },
+  {
+    "nombre": "AGUA PALORA",
+    "cedula": "1793186033001"
+  },
+  {
+    "nombre": "AGUAGALLO PILATAXI JOSE RAUL",
+    "cedula": "1801422120"
+  },
+  {
+    "nombre": "AGUAGUIÑA GUANANGA ERIK ALEXANDER",
+    "cedula": "1723965891"
+  },
+  {
+    "nombre": "AGUAISA SANCHEZ GLADYS MARCELA",
+    "cedula": "1500435050001"
+  },
+  {
+    "nombre": "AGUAIZA SANCHEZ JONATHAN JUAN CORLOS",
+    "cedula": "1500561608"
+  },
+  {
+    "nombre": "AGUAIZA TUTIN LUIS NICOLAS",
+    "cedula": "1804002994"
+  },
+  {
+    "nombre": "AGUAIZA TUTIN SEGUNDO ELIAS",
+    "cedula": "1803042686001"
+  },
+  {
+    "nombre": "AGUALONGO CHANGO HILDA SERAFINA",
+    "cedula": "1801916030"
+  },
+  {
+    "nombre": "AGUALONGO GALARZA LUIS MISAEL",
+    "cedula": "1801407592"
+  },
+  {
+    "nombre": "AGUALONGO GUALLCO DIEGO SEBASTIAN",
+    "cedula": "1600653321"
+  },
+  {
+    "nombre": "AGUALONGO GUALLCO EDWIN ROBERTO",
+    "cedula": "1600566762"
+  },
+  {
+    "nombre": "AGUALONGO GUALLCO ILDA MARINA",
+    "cedula": "1600566770"
+  },
+  {
+    "nombre": "AGUALONGO GUALLCO LUZ CARMEN",
+    "cedula": "1600566754001"
+  },
+  {
+    "nombre": "AGUALONGO GUAPISACA JOSE MANUEL",
+    "cedula": "1802479285"
+  },
+  {
+    "nombre": "AGUALONGO IZA LUIS ARMANDO",
+    "cedula": "1804596490"
+  },
+  {
+    "nombre": "AGUALONGO SIZA ANA TERESA",
+    "cedula": "1804988838"
+  },
+  {
+    "nombre": "AGUALONGO TENELEMA WILLIAN OSWALDO",
+    "cedula": "0202004941001"
+  },
+  {
+    "nombre": "AGUALONGO VALENCIA VERONICA GISSELA",
+    "cedula": "1600386310001"
+  },
+  {
+    "nombre": "AGUALSACA AGUALSACA RICARDO ALFONSO",
+    "cedula": "0650495724"
+  },
+  {
+    "nombre": "AGUALSACA ALULEMA GLORIA REBECA",
+    "cedula": "0603422668001"
+  },
+  {
+    "nombre": "AGUALSACA CAIZA SEGUNDO BRUNO",
+    "cedula": "1600522393"
+  },
+  {
+    "nombre": "AGUALSACA CIZA VICTORIA",
+    "cedula": "0603689951001"
+  },
+  {
+    "nombre": "AGUALSACA GREFA MARIA JOSEFINA",
+    "cedula": "1500255888"
+  },
+  {
+    "nombre": "AGUALSACA GUALLAN SEGUNDO VIDAL",
+    "cedula": "0603690579"
+  },
+  {
+    "nombre": "AGUALSACA GUANOLEMA MANUEL",
+    "cedula": "0604069773"
+  },
+  {
+    "nombre": "AGUALSACA GUANOLEMA SEGUNDO BENEDECTO",
+    "cedula": "0603688730"
+  },
+  {
+    "nombre": "AGUALSACA GUANOLEMA SEGUNDO JULIO",
+    "cedula": "1600254963"
+  },
+  {
+    "nombre": "AGUALZACA GUANOLEMA BALTASAR",
+    "cedula": "1600627416"
+  },
+  {
+    "nombre": "AGUARSACO CARGUA ALDOI JOEL",
+    "cedula": "1600658908"
+  }
+]
