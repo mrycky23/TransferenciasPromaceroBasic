@@ -15,6 +15,7 @@ import win32api
 import threading
 import keyboard
 import re
+from modules.informe_controller import InformeController
 
 # ==============================
 # CONFIGURACIÓN
@@ -736,6 +737,19 @@ app.bind("<Control-v>", pegado_inteligente)
 app.bind("<Escape>", lambda e: cerrar_sugerencias())
 
 # ==============================
+# PROCESAR INFORME PDF
+# ==============================
+
+def completar_informe_pdf():
+    ruta_pdf = filedialog.askopenfilename(
+        title="Seleccionar PDF de Informe",
+        filetypes=[("Archivos PDF", "*.pdf")]
+    )
+    if ruta_pdf:
+        controller = InformeController()
+        controller.procesar_informe(ruta_pdf, parent_window=app)
+
+# ==============================
 # BARRA SUPERIOR
 # ==============================
 
@@ -754,6 +768,13 @@ btn_resumen = ctk.CTkButton(
     fg_color="gray30", hover_color="gray40", width=130
 )
 btn_resumen.pack(side="left", padx=5)
+
+btn_informe = ctk.CTkButton(
+    barra_superior, text="📄 Completar Informe PDF",
+    command=completar_informe_pdf,
+    fg_color="#1f538d", hover_color="#14375e", width=170
+)
+btn_informe.pack(side="left", padx=5)
 
 btn_guardar = ctk.CTkButton(
     barra_superior,
