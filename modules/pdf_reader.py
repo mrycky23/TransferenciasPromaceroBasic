@@ -1,49 +1,249 @@
 import pdfplumber
 import re
 
+
 class PdfReader:
+
+    PATRON_FACTURA = re.compile(r"(001-002-\d{9}|001002\d{9})")
+    PATRON_FECHA = re.compile(r"\d{2}/\d{2}/\d{4}")
+    PATRON_NUMERO = re.compile(r"^\d{1,3}(?:,\d{3})*(?:\.\d+)?$|^\d+(?:\.\d+)?$")
+
+    HEADER_KEYWORDS = {
+        "factura": ["SECUENCIAL", "FACTURA", "COMPROBANTE", "NUMERO"],
+        "cliente": ["CLIENTE", "RAZON SOCIAL", "NOMBRE"],
+        "fecha": ["EMISION", "EMISIÓN", "FECHA"],
+        "total": ["TOTAL", "VALOR TOTAL"],
+        "efectivo": ["EFECTIVO", "EFEC."],
+        "chdia": ["CH.DIA", "CH/DIA", "CHEQUE", "DIFERIDO"],
+    }
+
     def __init__(self, pdf_path):
         self.pdf_path = pdf_path
 
+    # -----------------------------------------------------
+
+    def _detectar_columnas_cabecera(self, lineas):
+        """
+        Inspecciona las líneas extraídas con extract_text_lines()
+        para ubicar los límites horizontales (x0, x1) y centros X
+        de cada columna del reporte (SECUENCIAL, CLIENTE, FECHA, TOTAL, EFECTIVO, CH.DIA).
+        """
+        columnas = {}
+
+        for line in lineas:
+            texto_linea = line.get("text", "").upper()
+
+            # Verificar si la línea contiene suficientes palabras clave para ser cabecera
+            coincidencias = sum(
+                1 for clave, palabras in self.HEADER_KEYWORDS.items()
+                if any(p in texto_linea for p in palabras)
+            )
+
+            if coincidencias >= 2:
+                chars = line.get("chars", [])
+                if not chars:
+                    continue
+
+                # Agrupar caracteres contiguos en palabras de la cabecera
+                palabras_linea = self._obtener_palabras_de_linea(chars)
+
+                for p in palabras_linea:
+                    txt = p["text"].upper()
+                    for col_name, palabras_clave in self.HEADER_KEYWORDS.items():
+                        if col_name not in columnas:
+                            if any(pk in txt for pk in palabras_clave):
+                                columnas[col_name] = {
+                                    "x0": p["x0"],
+                                    "x1": p["x1"],
+                                    "center": (p["x0"] + p["x1"]) / 2.0
+                                }
+
+        return columnas
+
+    # -----------------------------------------------------
+
+    def _obtener_palabras_de_linea(self, chars):
+        """
+        Agrupa una lista de caracteres en palabras manteniendo coordenadas x0, x1.
+        """
+        palabras = []
+        if not chars:
+            return palabras
+
+        palabra_actual = []
+
+        for c in sorted(chars, key=lambda x: x["x0"]):
+            if not palabra_actual:
+                palabra_actual.append(c)
+            else:
+                # Distancia entre el final del último caracter y el inicio del actual
+                prev_c = palabra_actual[-1]
+                gap = c["x0"] - prev_c["x1"]
+                if gap < 3.5 and c.get("top", 0) - prev_c.get("top", 0) < 3.0:
+                    palabra_actual.append(c)
+                else:
+                    txt = "".join(ch["text"] for ch in palabra_actual).strip()
+                    if txt:
+                        palabras.append({
+                            "text": txt,
+                            "x0": palabra_actual[0]["x0"],
+                            "x1": palabra_actual[-1]["x1"],
+                            "top": palabra_actual[0]["top"],
+                            "bottom": palabra_actual[0]["bottom"]
+                        })
+                    palabra_actual = [c]
+
+        if palabra_actual:
+            txt = "".join(ch["text"] for ch in palabra_actual).strip()
+            if txt:
+                palabras.append({
+                    "text": txt,
+                    "x0": palabra_actual[0]["x0"],
+                    "x1": palabra_actual[-1]["x1"],
+                    "top": palabra_actual[0]["top"],
+                    "bottom": palabra_actual[0]["bottom"]
+                })
+
+        return palabras
+
+    # -----------------------------------------------------
+
+    def _extraer_datos_fila(self, line, columnas_detected):
+        """
+        Procesa una línea de texto de extract_text_lines() que contiene una factura.
+        Asigna el texto a cada columna por su posición X lógica.
+        """
+        chars = line.get("chars", [])
+        palabras = self._obtener_palabras_de_linea(chars)
+
+        registro = {
+            "factura": None,
+            "fecha": None,
+            "total": 0.0,
+            "efectivo": 0.0,
+            "x_factura": line.get("x0", 0),
+            "x_efectivo": None,
+            "x_chdia": None,
+        }
+
+        # Buscar factura en las palabras de la línea
+        word_factura = None
+        for p in palabras:
+            m = self.PATRON_FACTURA.fullmatch(p["text"])
+            if m:
+                registro["factura"] = m.group(1).replace("-", "")
+                word_factura = p
+                registro["x_factura"] = p["x0"]
+                break
+
+        if not registro["factura"]:
+            # Intento secundario por regex en el texto entero de la línea
+            m = self.PATRON_FACTURA.search(line.get("text", ""))
+            if m:
+                registro["factura"] = m.group(1).replace("-", "")
+
+        if not registro["factura"]:
+            return None
+
+        # Posiciones estimadas de columnas
+        x_efectivo_col = columnas_detected.get("efectivo", {}).get("center")
+        x_total_col = columnas_detected.get("total", {}).get("center")
+        x_chdia_col = columnas_detected.get("chdia", {}).get("center")
+
+        registro["x_efectivo"] = x_efectivo_col
+        registro["x_chdia"] = x_chdia_col
+
+        # Clasificar números por cercanía horizontal a las columnas detectadas
+        for p in palabras:
+            txt = p["text"].replace(",", "")
+            if self.PATRON_NUMERO.fullmatch(txt):
+                try:
+                    val = float(txt)
+                except ValueError:
+                    continue
+
+                center_p = (p["x0"] + p["x1"]) / 2.0
+
+                if x_efectivo_col is not None:
+                    # Si el número está cerca de la columna EFECTIVO
+                    if abs(center_p - x_efectivo_col) <= 35:
+                        registro["efectivo"] = val
+                        continue
+
+                if x_total_col is not None:
+                    # Si el número está cerca de la columna TOTAL
+                    if abs(center_p - x_total_col) <= 35:
+                        registro["total"] = val
+                        continue
+
+                # Si no se detectaron cabeceras explícitas, fallback por orden numérico
+                # (Normalmente el primer float relevante es total y el segundo es efectivo si x0 > total_x)
+
+        return registro
+
+    # -----------------------------------------------------
+
     def extraer_facturas(self, progress_callback=None):
-        """
-        Lee todo el PDF utilizando pdfplumber.
-        Devuelve una lista de diccionarios con:
-        [
-            {
-                "factura": "001002000458741",
-                "x": 72.51,
-                "y": 416.82,
-                "pagina": 1
-            }, ...
-        ]
-        """
-        hallazgos = []
-        # Patrones para identificar números de factura (ej. 15 dígitos o prefijo 001002000...)
-        patron_factura = re.compile(r"\b(001002000\d{6}|\d{15}|\d{3}-\d{3}-\d{9})\b")
+        resultado = []
 
         with pdfplumber.open(self.pdf_path) as pdf:
             total_paginas = len(pdf.pages)
+            columnas_globales = {}
 
-            for num_pag, page in enumerate(pdf.pages, start=1):
-                words = page.extract_words()
-                
-                for word in words:
-                    texto = word["text"].strip()
-                    coincidencias = patron_factura.findall(texto)
-                    for factura in coincidencias:
-                        # Limpiar guiones si los hubiera
-                        factura_limpia = factura.replace("-", "")
-                        hallazgos.append({
-                            "factura": factura_limpia,
-                            "x": float(word["x0"]),
-                            "y": float(word["top"]), # Coordenada Y desde la parte superior
-                            "pagina": num_pag,
-                            "page_height": float(page.height),
-                            "page_width": float(page.width)
-                        })
+            for numero_pagina, page in enumerate(pdf.pages, start=1):
+                # Usar page.extract_text_lines() para reconstruir la estructura lógica
+                lineas = page.extract_text_lines(
+                    layout=True,
+                    strip=True
+                )
+
+                # Intentar detectar cabeceras en esta página
+                cols_pag = self._detectar_columnas_cabecera(lineas)
+                if cols_pag:
+                    columnas_globales.update(cols_pag)
+
+                # Usar columnas detectadas en la página o las acumuladas globales
+                columnas_actuales = columnas_globales
+
+                for line in lineas:
+                    texto = line.get("text", "")
+
+                    if self.PATRON_FACTURA.search(texto):
+                        datos = self._extraer_datos_fila(line, columnas_actuales)
+
+                        if datos and datos.get("factura"):
+                            # Coordenadas por defecto si no hubo detección de cabecera
+                            x_efec = datos["x_efectivo"]
+                            if x_efec is None:
+                                x_efec = datos["x_factura"] + 320.0
+
+                            x_ch = datos["x_chdia"]
+                            if x_ch is None:
+                                x_ch = datos["x_factura"] + 390.0
+
+                            valor_efectivo = datos["efectivo"]
+                            tiene_efectivo = valor_efectivo > 0.001
+
+                            resultado.append({
+                                "factura": datos["factura"],
+                                "pagina": numero_pagina,
+                                "x": datos["x_factura"],
+                                "y": line["top"],
+                                "height": line["bottom"] - line["top"],
+                                "x_efectivo": x_efec,
+                                "x_chdia": x_ch,
+                                "page_width": page.width,
+                                "page_height": page.height,
+                                "valor_total": datos["total"],
+                                "valor_efectivo": valor_efectivo,
+                                "tiene_efectivo": tiene_efectivo,
+                            })
 
                 if progress_callback:
-                    progress_callback(num_pag, total_paginas, len(hallazgos))
+                    progress_callback(
+                        numero_pagina,
+                        total_paginas,
+                        len(resultado)
+                    )
 
-        return hallazgos
+        return resultado

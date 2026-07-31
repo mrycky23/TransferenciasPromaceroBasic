@@ -16,13 +16,20 @@ import threading
 import keyboard
 import re
 from modules.informe_controller import InformeController
-
+import traceback
 # ==============================
 # CONFIGURACIÓN
 # ==============================
 
-ctk.set_appearance_mode("dark")
-ctk.set_default_color_theme("blue")
+
+def manejar_error_tkinter(exc, val, tb):
+    error_msg = "".join(traceback.format_exception(exc, val, tb))
+    print(error_msg)
+    with open("error_tkinter.txt", "w", encoding="utf-8") as f:
+        f.write(error_msg)
+    messagebox.showerror("Error Tkinter", error_msg)
+
+
 
 archivo_excel = "MODELO.xlsx"
 archivo_historial = "clientes_historial.json"
@@ -129,6 +136,22 @@ def on_nombre_keyrelease(event):
 # ==============================
 # PEGADO INTELIGENTE
 # ==============================
+def completar_informe_pdf():
+    ruta_pdf = filedialog.askopenfilename(
+        title="Seleccionar PDF de Informe",
+        filetypes=[("Archivos PDF", "*.pdf")]
+    )
+    if not ruta_pdf:
+        return
+
+    def ejecutar():
+        controller = InformeController()
+        controller.procesar_informe(ruta_pdf, parent_window=app)
+
+    # Ejecutar en hilo secundario para no bloquear Tkinter
+    hilo = threading.Thread(target=ejecutar, daemon=True)
+    hilo.start()
+
 
 def pegado_inteligente(event=None):
     """

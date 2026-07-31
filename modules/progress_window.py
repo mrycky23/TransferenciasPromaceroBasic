@@ -9,7 +9,6 @@ class ProgressWindow(ctk.CTkToplevel):
         self.resizable(False, False)
         self.attributes("-topmost", True)
 
-        # Centrar respecto al parent si es posible
         try:
             x = parent.winfo_rootx() + (parent.winfo_width() // 2) - 190
             y = parent.winfo_rooty() + (parent.winfo_height() // 2) - 140
@@ -17,7 +16,7 @@ class ProgressWindow(ctk.CTkToplevel):
         except Exception:
             pass
 
-        self.protocol("WM_DELETE_WINDOW", lambda: None) # Impedir cierre manual durante proceso
+        self.protocol("WM_DELETE_WINDOW", lambda: None)
 
         self.frame = ctk.CTkFrame(self, corner_radius=12)
         self.frame.pack(fill="both", expand=True, padx=15, pady=15)
@@ -49,9 +48,18 @@ class ProgressWindow(ctk.CTkToplevel):
         self.lbl_facturas.pack(pady=5)
 
     def actualizar_progreso(self, pagina_actual, total_paginas, facturas_conteo):
-        if total_paginas > 0:
-            porcentaje = pagina_actual / total_paginas
-            self.progress_bar.set(porcentaje)
-            self.lbl_pagina.configure(text=f"Página\n{pagina_actual} / {total_paginas}")
-            self.lbl_facturas.configure(text=f"Facturas encontradas\n{facturas_conteo}")
-        self.update_idletasks()
+        # ← Usar after() para ejecutar en el hilo principal de Tkinter
+        self.after(0, self._actualizar_ui, pagina_actual, total_paginas, facturas_conteo)
+
+    def _actualizar_ui(self, pagina_actual, total_paginas, facturas_conteo):
+        # Este método siempre corre en el hilo principal
+        try:
+            if not self.winfo_exists():
+                return
+            if total_paginas > 0:
+                porcentaje = pagina_actual / total_paginas
+                self.progress_bar.set(porcentaje)
+                self.lbl_pagina.configure(text=f"Página\n{pagina_actual} / {total_paginas}")
+                self.lbl_facturas.configure(text=f"Facturas encontradas\n{facturas_conteo}")
+        except Exception:
+            pass

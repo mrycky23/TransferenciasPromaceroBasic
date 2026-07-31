@@ -10,11 +10,18 @@ LOGS_DIR = os.path.join(BASE_DIR, "logs")
 # Prefijo predeterminado de facturas
 PREFIJO_FACTURA_DEFAULT = "001002000"
 
-# Desplazamiento X / Y para escribir en la columna EFECTIVO
-# X_OFFSET: Distancia desde la coordenada X de la factura encontrada hasta la columna EFECTIVO.
-# Ajustable según el diseño exacto del PDF original.
-EFECTIVO_X_OFFSET = 380.0
-EFECTIVO_Y_OFFSET = 3.0
+# Desplazamientos X / Y para escribir en las columnas del PDF
+# EFECTIVO_X_OFFSET: Distancia desde X de la factura hasta la columna EFECTIVO
+EFECTIVO_X_OFFSET = 320.0
+
+# CHDIA_X_OFFSET: Distancia desde X de la factura hasta la columna CH.DIA
+CHDIA_X_OFFSET = 390.0
+
+EFECTIVO_Y_OFFSET = 0.0
+
+# Rango X estimado para detectar si la columna EFECTIVO del PDF contiene un valor
+EFECTIVO_COL_MIN_X = 300.0
+EFECTIVO_COL_MAX_X = 370.0
 
 # Nombre por defecto del informe final
 DEFAULT_REPORT_NAME = "Informe_Completado.pdf"

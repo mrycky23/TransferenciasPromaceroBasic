@@ -15,3 +15,5 @@ venv/
 # Archivos de configuración
 config.json
 
+pdfs_generados
+
