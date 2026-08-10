@@ -355,6 +355,62 @@ def mostrar_resumen_dia():
         messagebox.showerror("Error", str(e))
 
 # ==============================
+# LIMPIAR REGISTROS EXCEL
+# ==============================
+
+def limpiar_registros_excel():
+    confirmar = messagebox.askyesno(
+        "⚠️ Limpiar registros",
+        "¿Está seguro de que desea BORRAR todos los registros del archivo Excel?\n\n"
+        "Esta acción eliminará todas las transferencias registradas\n"
+        "y NO se puede deshacer."
+    )
+    if not confirmar:
+        return
+
+    # Segunda confirmación por seguridad
+    confirmar2 = messagebox.askyesno(
+        "Confirmar eliminación",
+        "⚠️ ÚLTIMA CONFIRMACIÓN\n\n"
+        "Se borrarán TODOS los registros del Excel.\n"
+        "¿Continuar?"
+    )
+    if not confirmar2:
+        return
+
+    try:
+        wb = load_workbook(archivo_excel)
+        ws = wb.active
+
+        # Limpiar sección 1 (filas 4 a 44)
+        for fila in range(4, 45):
+            ws[f"B{fila}"] = None
+            ws[f"C{fila}"] = None
+            ws[f"D{fila}"] = None
+            ws[f"E{fila}"] = None
+            ws[f"F{fila}"] = None
+            ws[f"G{fila}"] = None
+
+        # Limpiar sección 2 (filas 56 en adelante hasta la última fila con datos)
+        fila = 56
+        while ws[f"B{fila}"].value is not None:
+            ws[f"B{fila}"] = None
+            ws[f"C{fila}"] = None
+            ws[f"D{fila}"] = None
+            ws[f"E{fila}"] = None
+            ws[f"F{fila}"] = None
+            ws[f"G{fila}"] = None
+            fila += 1
+
+        wb.save(archivo_excel)
+        messagebox.showinfo(
+            "✅ Registros limpiados",
+            "Los registros del Excel han sido eliminados correctamente."
+        )
+    except Exception as e:
+        messagebox.showerror("Error al limpiar", str(e))
+
+# ==============================
 # VERIFICAR DUPLICADO
 # ==============================
 
@@ -795,13 +851,6 @@ btn_config = ctk.CTkButton(
 )
 btn_config.pack(side="left", padx=5)
 
-btn_resumen = ctk.CTkButton(
-    barra_superior, text="📊 Resumen día",
-    command=mostrar_resumen_dia,
-    fg_color="gray30", hover_color="gray40", width=130
-)
-btn_resumen.pack(side="left", padx=5)
-
 btn_informe = ctk.CTkButton(
     barra_superior, text="📄 Completar Informe PDF",
     command=completar_informe_pdf,
@@ -818,6 +867,15 @@ btn_guardar = ctk.CTkButton(
 )
 btn_guardar.pack(side="right", padx=5)
 
+btn_limpiar_excel = ctk.CTkButton(
+    barra_superior,
+    text="🗑 Limpiar Excel",
+    fg_color="#8b1a1a", hover_color="#b22222",
+    height=35, width=140,
+    command=limpiar_registros_excel
+)
+btn_limpiar_excel.pack(side="right", padx=5)
+
 # ==============================
 # FORMULARIO (SCROLL)
 # ==============================
@@ -830,13 +888,6 @@ titulo = ctk.CTkLabel(
     font=ctk.CTkFont(size=20, weight="bold")
 )
 titulo.pack(pady=15)
-
-# Hint pegado inteligente
-ctk.CTkLabel(
-    frame,
-    text="💡 CTRL+V pega datos del cliente o imagen automáticamente",
-    text_color="gray", font=ctk.CTkFont(size=11)
-).pack(pady=(0, 8))
 
 # Nombre con autocompletado
 entry_nombre = ctk.CTkEntry(frame, placeholder_text="Nombre cliente", width=400)
@@ -939,22 +990,17 @@ lbl_total = ctk.CTkLabel(
     font=ctk.CTkFont(size=15, weight="bold"),
     text_color="#4CAF50"
 )
-lbl_total.pack(pady=4)
+lbl_total.pack(pady=2)
 
 # ==============================
 # IMAGEN
 # ==============================
 
-ctk.CTkLabel(
-    frame, text="COMPROBANTE",
-    font=ctk.CTkFont(size=13, weight="bold")
-).pack(pady=(12, 2))
-
 btn_imagen = ctk.CTkButton(frame, text="📁 Seleccionar imagen", command=seleccionar_imagen)
 btn_imagen.pack(pady=6)
 
-drop_frame = ctk.CTkFrame(frame, width=400, height=70)
-drop_frame.pack(pady=10)
+drop_frame = ctk.CTkFrame(frame, width=400, height=50)
+drop_frame.pack(pady=2)
 drop_frame.pack_propagate(False)
 
 lbl_drop = ctk.CTkLabel(
