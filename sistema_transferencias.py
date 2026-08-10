@@ -317,42 +317,39 @@ def mostrar_resumen_dia():
     try:
         wb = load_workbook(archivo_excel)
         ws = wb.active
-        hoy = datetime.now().strftime("%d/%m/%Y")
-
+        # Contar y sumar todas las transferencias sin filtrar por fecha
         total_dia = 0
         count = 0
-        
-        # Escanear primera sección (filas 4 a 44)
+        # Primera sección (filas 4 a 44)
         fila = 4
         while ws[f"B{fila}"].value is not None and fila < 45:
-            fecha_celda = ws[f"C{fila}"].value
             valor_celda = ws[f"F{fila}"].value
-            if str(fecha_celda) == hoy:
-                try:
-                    total_dia += float(valor_celda)
-                    count += 1
-                except:
-                    pass
+            try:
+                total_dia += float(valor_celda)
+                count += 1
+            except Exception:
+                pass
             fila += 1
-
-        # Escanear segunda sección (filas 56 en adelante)
+        # Segunda sección (filas 56 en adelante)
         fila = 56
         while ws[f"B{fila}"].value is not None:
-            fecha_celda = ws[f"C{fila}"].value
             valor_celda = ws[f"F{fila}"].value
-            if str(fecha_celda) == hoy:
-                try:
-                    total_dia += float(valor_celda)
-                    count += 1
-                except:
-                    pass
+            try:
+                total_dia += float(valor_celda)
+                count += 1
+            except Exception:
+                pass
             fila += 1
-
+        # Debug logging
+        debug_msg = f"[DEBUG] Count={count}, Total={total_dia}\n"
+        try:
+            with open('debug_resumen.txt','a',encoding='utf-8') as f:
+                f.write(debug_msg)
+        except Exception as e:
+            print('Logging error:', e)
         messagebox.showinfo(
             "Resumen del día",
-            f"📅 Fecha: {hoy}\n\n"
-            f"📋 Facturas registradas hoy: {count}\n"
-            f"💰 Total del día: ${total_dia:.2f}"
+            f"📅 Total de transferencias registradas: {count}\n💰 Total acumulado: ${total_dia:.2f}"
         )
     except Exception as e:
         messagebox.showerror("Error", str(e))
@@ -668,9 +665,22 @@ def abrir_configuracion():
     cargar_configuracion()
 
 def generar_pdf(nombre, cedula, total, facturas_lista, fecha):
-    if not imagen_path:
-        raise Exception("Debe agregar una imagen del comprobante")
-
+    # If an image was provided, embed it; otherwise continue without image.
+    if imagen_path and os.path.exists(imagen_path):
+        img = RLImage(imagen_path)
+        max_width = ancho - 80
+        max_height = espacio_imagen
+        ratio = img.imageWidth / img.imageHeight
+        img.drawWidth = max_width
+        img.drawHeight = max_width / ratio
+        if img.drawHeight > max_height:
+            img.drawHeight = max_height
+            img.drawWidth = max_height * ratio
+        elements.append(img)
+        elements.append(Spacer(1, 15))
+    else:
+        # No image provided; optionally log for debugging
+        print("[INFO] No image path provided for PDF; proceeding without image.")
     ancho, alto = letter
     pdf = SimpleDocTemplate(
         "comprobante.pdf",

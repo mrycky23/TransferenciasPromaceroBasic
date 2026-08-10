@@ -183,6 +183,72 @@ class PdfReader:
 
     # -----------------------------------------------------
 
+    def _ocr_extraer_lineas(self, numero_pagina):
+        import fitz
+        import pytesseract
+        from PIL import Image
+
+        pytesseract.pytesseract.tesseract_cmd = r'D:\Users\tesseract.exe'
+        lineas = []
+        try:
+            doc = fitz.open(self.pdf_path)
+            page = doc[numero_pagina - 1]
+            # render at 300 DPI
+            zoom = 300 / 72
+            mat = fitz.Matrix(zoom, zoom)
+            pix = page.get_pixmap(matrix=mat)
+            img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+            
+            data = pytesseract.image_to_data(img, output_type=pytesseract.Output.DICT)
+            
+            lineas_dict = {}
+            for i in range(len(data['level'])):
+                text = data['text'][i].strip()
+                if not text:
+                    continue
+                line_key = (data['block_num'][i], data['par_num'][i], data['line_num'][i])
+                
+                # Scale coordinates back to PDF points
+                x0 = data['left'][i] / zoom
+                top = data['top'][i] / zoom
+                x1 = (data['left'][i] + data['width'][i]) / zoom
+                bottom = (data['top'][i] + data['height'][i]) / zoom
+                
+                char_simulado = {
+                    "text": text,
+                    "x0": x0,
+                    "x1": x1,
+                    "top": top,
+                    "bottom": bottom
+                }
+                
+                if line_key not in lineas_dict:
+                    lineas_dict[line_key] = {
+                        "text": text,
+                        "chars": [char_simulado],
+                        "x0": x0,
+                        "x1": x1,
+                        "top": top,
+                        "bottom": bottom
+                    }
+                else:
+                    lineas_dict[line_key]["text"] += " " + text
+                    lineas_dict[line_key]["chars"].append(char_simulado)
+                    lineas_dict[line_key]["x0"] = min(lineas_dict[line_key]["x0"], x0)
+                    lineas_dict[line_key]["x1"] = max(lineas_dict[line_key]["x1"], x1)
+                    lineas_dict[line_key]["top"] = min(lineas_dict[line_key]["top"], top)
+                    lineas_dict[line_key]["bottom"] = max(lineas_dict[line_key]["bottom"], bottom)
+                    
+            lineas = list(lineas_dict.values())
+            # Ordenar de arriba hacia abajo
+            lineas.sort(key=lambda x: x["top"])
+            doc.close()
+        except Exception as e:
+            print(f"[PdfReader] Error en OCR para pág {numero_pagina}: {e}")
+        return lineas
+
+    # -----------------------------------------------------
+
     def extraer_facturas(self, progress_callback=None):
         resultado = []
 
@@ -196,6 +262,11 @@ class PdfReader:
                     layout=True,
                     strip=True
                 )
+
+                # Fallback a OCR si la página no tiene texto (ej. documento escaneado)
+                if not lineas:
+                    print(f"[PdfReader] Página {numero_pagina} sin texto, ejecutando OCR...")
+                    lineas = self._ocr_extraer_lineas(numero_pagina)
 
                 # Intentar detectar cabeceras en esta página
                 cols_pag = self._detectar_columnas_cabecera(lineas)

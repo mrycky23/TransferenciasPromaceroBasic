@@ -48,10 +48,9 @@ class ExcelManager:
         index = {}
 
         def procesar_fila(fila):
-            val_b = ws[f"B{fila}"].value  # #COMPROBANTE (número bancario)
+            val_b = ws[f"H{fila}"].value  # TRANSFERENCIA
             val_e = ws[f"E{fila}"].value  # FACTURA
             val_f = ws[f"F{fila}"].value  # VALOR
-            val_h = ws[f"H{fila}"].value  # # TRANSFERENCIA → CI que va al PDF
 
             if val_e is None or not str(val_e).strip():
                 return
@@ -60,8 +59,9 @@ class ExcelManager:
             # extrae el PDF reader (que también normaliza)
             factura_str = normalizar_factura(val_e)
 
-            comprobante_bancario = str(val_b).strip() if val_b is not None else ""
-            registro_ci = str(val_h).strip() if val_h is not None else ""
+            # La transferencia se guarda en la columna B
+            registro_ci = str(val_b).strip() if val_b is not None else ""
+            comprobante_bancario = registro_ci
 
             try:
                 valor_num = float(val_f) if val_f is not None else 0.0
@@ -86,17 +86,18 @@ class ExcelManager:
                 index[factura_str]["transferencias"].append(transf)
                 index[factura_str]["valor"] += valor_num
 
-        # Sección 1: filas 4 a 44
-        for fila in range(4, 45):
-            if ws[f"B{fila}"].value is None and ws[f"E{fila}"].value is None:
+        # Sección 1: filas 4 a 60
+        for fila in range(4, 60):
+            if ws[f"H{fila}"].value is None and ws[f"E{fila}"].value is None:
                 continue
             procesar_fila(fila)
 
-        # Sección 2: filas 56 hasta el final
-        fila = 56
+        # Sección
+        #  2: filas 56 hasta el final
+        fila = 62
         max_row = ws.max_row or 200
         while fila <= max_row:
-            if ws[f"B{fila}"].value is not None or ws[f"E{fila}"].value is not None:
+            if ws[f"H{fila}"].value is not None or ws[f"E{fila}"].value is not None:
                 procesar_fila(fila)
             fila += 1
 
