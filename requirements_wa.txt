@@ -1,0 +1,7 @@
+# Dependencias del módulo WhatsApp Forwarder
+# Instalar con: pip install -r requirements_wa.txt
+# Luego ejecutar: playwright install chromium
+
+playwright>=1.44.0
+pystray>=0.19.5
+Pillow>=10.0.0
