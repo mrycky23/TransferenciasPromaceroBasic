@@ -721,6 +721,181 @@ def abrir_configuracion():
     cargar_configuracion()
 
 def generar_pdf(nombre, cedula, total, facturas_lista, fecha):
+    """
+    Genera el comprobante PDF.
+
+    Si existe una imagen, la inserta y la ajusta
+    proporcionalmente al tamaño de la página.
+    """
+
+    # ==========================================================
+    # DIMENSIONES DE LA PÁGINA
+    # ==========================================================
+
+    ancho, alto = letter
+
+    # ==========================================================
+    # CREAR DOCUMENTO PDF
+    # ==========================================================
+
+    pdf = SimpleDocTemplate(
+        "comprobante.pdf",
+        pagesize=letter,
+        topMargin=40,
+        bottomMargin=40,
+        leftMargin=40,
+        rightMargin=40
+    )
+
+    # ==========================================================
+    # LISTA DE ELEMENTOS
+    # ==========================================================
+
+    elements = []
+
+    # ==========================================================
+    # ESTILOS
+    # ==========================================================
+
+    styles = getSampleStyleSheet()
+
+    # ==========================================================
+    # ESPACIO DISPONIBLE PARA LA IMAGEN
+    # ==========================================================
+
+    espacio_imagen = alto - 260
+
+    # ==========================================================
+    # INSERTAR IMAGEN SI EXISTE
+    # ==========================================================
+
+    if imagen_path and os.path.exists(imagen_path):
+
+        try:
+
+            img = RLImage(
+                imagen_path
+            )
+
+            # --------------------------------------------------
+            # Tamaño máximo permitido
+            # --------------------------------------------------
+
+            max_width = ancho - 80
+            max_height = espacio_imagen
+
+            # --------------------------------------------------
+            # Mantener proporción original
+            # --------------------------------------------------
+
+            ratio = (
+                img.imageWidth /
+                img.imageHeight
+            )
+
+            # --------------------------------------------------
+            # Primero ajustar al ancho
+            # --------------------------------------------------
+
+            img.drawWidth = max_width
+
+            img.drawHeight = (
+                max_width / ratio
+            )
+
+            # --------------------------------------------------
+            # Si supera la altura disponible,
+            # ajustar nuevamente manteniendo proporción
+            # --------------------------------------------------
+
+            if img.drawHeight > max_height:
+
+                img.drawHeight = max_height
+
+                img.drawWidth = (
+                    max_height * ratio
+                )
+
+            # --------------------------------------------------
+            # Agregar imagen al PDF
+            # --------------------------------------------------
+
+            elements.append(img)
+
+            elements.append(
+                Spacer(1, 15)
+            )
+
+        except Exception as e:
+
+            print(
+                "[ADVERTENCIA] "
+                f"No se pudo insertar la imagen: {e}"
+            )
+
+    else:
+
+        print(
+            "[INFO] "
+            "No se proporcionó una imagen para el PDF."
+        )
+
+    # ==========================================================
+    # DATOS DEL COMPROBANTE
+    # ==========================================================
+
+    elements.append(
+        Paragraph(
+            f"Fecha: {fecha}",
+            estilo_grande
+        )
+    )
+
+    elements.append(
+        Paragraph(
+            f"Cliente: {nombre}",
+            estilo_grande
+        )
+    )
+
+    elements.append(
+        Paragraph(
+            f"Cédula: {cedula}",
+            estilo_grande
+        )
+    )
+
+    elements.append(
+        Paragraph(
+            f"Total: ${total:.2f}",
+            estilo_grande
+        )
+    )
+
+    # ==========================================================
+    # FACTURAS
+    # ==========================================================
+
+    for factura, valor in facturas_lista:
+
+        elements.append(
+            Paragraph(
+                f"{factura}  |  ${valor:.2f}",
+                estilo_grande
+            )
+        )
+
+    # ==========================================================
+    # GENERAR PDF
+    # ==========================================================
+
+    pdf.build(
+        elements
+    )
+
+    print(
+        "[PDF] Comprobante generado correctamente."
+    )
     # If an image was provided, embed it; otherwise continue without image.
     if imagen_path and os.path.exists(imagen_path):
         img = RLImage(imagen_path)

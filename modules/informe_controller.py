@@ -127,21 +127,37 @@ class InformeController:
                 # Abrir el PDF generado automáticamente
                 def abrir_pdf():
                     try:
-                        if os.name == 'nt':
-                            win32api.ShellExecute(0, "open", ruta_pdf_generado, None, ".", 1)
-                        else:
-                            os.system(f'xdg-open "{ruta_pdf_generado}"')
+                        os.startfile(ruta_pdf_generado)
                     except Exception as e:
                         print("No se pudo abrir el PDF automáticamente:", e)
 
                 if parent_window:
-                    parent_window.after(500, abrir_pdf)
+                    parent_window.after(800, abrir_pdf)
                 else:
                     abrir_pdf()
 
             except Exception as e:
+                import traceback
+                import os
+                tb_str = traceback.format_exc()
+                # Guardar log completo para diagnóstico en EXE
+                try:
+                    log_path = os.path.join(
+                        os.path.dirname(os.path.abspath(
+                            getattr(__import__('sys'), 'executable', __file__)
+                        )),
+                        "error_informe.txt"
+                    )
+                    with open(log_path, "w", encoding="utf-8") as _f:
+                        _f.write(tb_str)
+                except Exception:
+                    pass
                 cerrar_progress()
-                mostrar_error(f"Ocurrió un error inesperado:\n{str(e)}")
+                mostrar_error(
+                    f"Ocurrió un error inesperado:\n{str(e)}\n\n"
+                    f"Detalles guardados en: error_informe.txt\n\n"
+                    f"{tb_str}"
+                )
 
         # ── Lanzar el worker en hilo secundario ─────────────────────────────
         import threading

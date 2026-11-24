@@ -48,7 +48,7 @@ class ExcelManager:
         index = {}
 
         def procesar_fila(fila):
-            val_b = ws[f"H{fila}"].value  # TRANSFERENCIA
+            val_b = ws[f"H{fila}"].value  # TRANSFERENCIA (CI)
             val_e = ws[f"E{fila}"].value  # FACTURA
             val_f = ws[f"F{fila}"].value  # VALOR
 
@@ -88,7 +88,7 @@ class ExcelManager:
 
         # Sección 1: filas 4 a 60
         for fila in range(4, 60):
-            if ws[f"H{fila}"].value is None and ws[f"E{fila}"].value is None:
+            if ws[f"B{fila}"].value is None and ws[f"E{fila}"].value is None:
                 continue
             procesar_fila(fila)
 
@@ -97,7 +97,7 @@ class ExcelManager:
         fila = 62
         max_row = ws.max_row or 200
         while fila <= max_row:
-            if ws[f"H{fila}"].value is not None or ws[f"E{fila}"].value is not None:
+            if ws[f"B{fila}"].value is not None or ws[f"E{fila}"].value is not None:
                 procesar_fila(fila)
             fila += 1
 

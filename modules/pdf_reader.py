@@ -188,7 +188,7 @@ class PdfReader:
         import pytesseract
         from PIL import Image
 
-        pytesseract.pytesseract.tesseract_cmd = r'D:\Users\tesseract.exe'
+        pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.ex'
         lineas = []
         try:
             doc = fitz.open(self.pdf_path)
